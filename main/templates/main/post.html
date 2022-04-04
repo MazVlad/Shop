@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<center>
+<h1>{{post.name}}</h1>
+
+{% if post.photo %}
+<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+{% endif %}
+    <form action="{% url 'cart:cart_add' post.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+    </form>
+<p>ОПИСАНИЕ ТОВАРА: {{post.description}}</p>
+
+    <p>ЦЕНА: {{post.price}}руб.</p>
+</center>
+{% endblock %}

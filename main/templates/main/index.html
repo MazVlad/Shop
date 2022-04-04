@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% block title %} Главная {%  endblock title %}
+{% block content %}
+<center>
+{% for product in products %}
+<p><h2><a href="{% url 'main:post' product.pk %}">{{ product.name }}</a></h2></p>
+    <p class="price">Руб.{{ product.price }}</p>
+{% if product.photo %}
+<p><img class="img" src="{{product.photo.url}}"></p>
+{% endif  %}
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+    </form>
+    <hr>
+{% endfor %}
+</center>
+
+{% endblock %}

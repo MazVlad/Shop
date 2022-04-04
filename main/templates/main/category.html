@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} fddfdf {%  endblock title %}
+
+
+
+{% block content %}
+
+<center>
+{%  for i in posts %}
+    <p><h2><a href="{% url 'main:post' i.pk %}">{{ i.name }}</a></h2></p>
+{% if i.photo %}
+<p><img class="img" src="{{i.photo.url}}"></p>
+{% endif %}
+    <form action="{% url 'cart:cart_add' i.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+    </form>
+    <hr>
+    {% endfor %}
+
+</center>
+
+{% endblock %}
